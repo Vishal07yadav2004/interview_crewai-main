@@ -1,0 +1,29 @@
+manage_interview_flow:
+  description: "Determine interview topic, type, and flow plan."
+  agent: interview_manager
+
+generate_questions:
+  description: "Create technical and HR interview questions based on the topic."
+  agent: question_generator
+  depends_on: manage_interview_flow
+
+conduct_conversation:
+  description: "Simulate a realistic interview conversation using generated questions."
+  agent: conversation_agent
+  depends_on: generate_questions
+
+evaluate_response:
+  description: "Analyze candidate responses for accuracy, tone, and clarity."
+  agent: response_evaluator
+  depends_on: conduct_conversation
+
+provide_feedback:
+  description: "Provide constructive feedback based on evaluator’s results."
+  agent: feedback_coach
+  depends_on: evaluate_response
+
+
+generate_report:
+  description: "Compile interview summary into a structured final report."
+  agent: report_generator
+  depends_on: [provide_feedback]
